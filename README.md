@@ -2,6 +2,6 @@
 
 ## Installation
 
-```git clone git@github.com:sreekanthb/emacs-config.git ; mv emacs-config ~/.emacs.d ; rm -rf emacs-config```
+```git clone git@github.com:sreekanthb/emacs-config.git ; mv emacs-config ~/.emacs.d```
 
 Start emacs
