@@ -18,7 +18,7 @@
     (package-install 'use-package))
   (require 'use-package)
   (setq use-package-verbose t
-        use-package-always-defer t
+        use-package-always-defer nil
 	use-package-always-ensure t))
 
 ;; cool packages to have
@@ -242,6 +242,7 @@
   (add-hook 'clojure-mode-hook #'paredit-mode))
 
 ;; CIDER - https://github.com/clojure-emacs/cider
+;; Run this on first install, issue with cider package
 (use-package cider
   :ensure t
   :config
@@ -261,6 +262,8 @@
   :config
   (global-set-key (kbd "M-o") 'ace-window))
 
+(use-package git-timemachine
+  :ensure t)
 ;;; -------
 
 ;;; init.el ends here
