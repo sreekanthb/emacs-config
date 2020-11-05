@@ -217,7 +217,8 @@
 
 (use-package magit
   :config
-  (global-set-key (kbd "C-x g") 'magit-status))
+  (global-set-key (kbd "C-x g") 'magit-status)
+  (global-set-key (kbd "C-x p") 'magit-push))
 
 ;; smart-mode-line - https://github.com/Malabarba/smart-mode-line
 (use-package smart-mode-line
