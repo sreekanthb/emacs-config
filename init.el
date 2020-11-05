@@ -9,7 +9,8 @@
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 			 ("melpa" . "https://melpa.org/packages/")))
-(package-refresh-contents)
+(when (not package-archive-contents)
+  (package-refresh-contents t))
 
 ;; cool packages to have
 (defvar package-list
