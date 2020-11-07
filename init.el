@@ -183,11 +183,16 @@
     :ensure t
     :config
     (ido-ubiquitous-mode 1))
+  (use-package ido-vertical-mode
+    :ensure t
+    :config
+    (ido-vertical-mode 1)
+    (setq ido-vertical-define-keys 'C-n-and-C-p-only))
   ;; Smex is a M-x enhancement for Emacs
   (use-package smex
-    :config (smex-initialize)
     :bind (("M-x" . 'smex)
-	   ("M-X" . 'smex-major-mode-commands))))
+	   ("M-X" . 'smex-major-mode-commands))
+    :config (smex-initialize)))
 
 ;; Modern on-the-fly syntax checking extension for GNU Emacs.
 (use-package flycheck
