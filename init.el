@@ -1,8 +1,9 @@
-;;; init.el -- My Emacs init file
+;;; init.el -- Emacs init file
 
 ;;; Commentary:
 
 ;;; Code:
+
 ;; Intialize packahes
 (eval-when-compile
   (require 'package)
@@ -23,7 +24,7 @@
 
 ;; cool packages to have
 (defvar package-list
-  '(use-package smex flycheck ctable company cyberpunk-theme yasnippet
+  '(smex use-package flycheck ctable company cyberpunk-theme yasnippet
      exec-path-from-shell magit))
 
 ; install the missing packages
@@ -60,8 +61,8 @@
 (setq custom-file (concat cache-dir "emacs-custom.el"))
 (unless (file-exists-p cache-dir)
   (make-directory cache-dir))
-(load custom-file 'noerror)                                             ; put custom.el in .cache
-
+;; put custom.el in .cache
+(load custom-file 'noerror)
 
 (defun donot-litter ()
   "Do not litter .emacs.d with saves and backup files"
@@ -123,9 +124,7 @@
 (global-set-key (kbd "C-|")  'toggle-frame-maximized)
 (global-set-key "\C-cp" 'replace-string)
 (global-set-key "\C-z" 'eshell)
-
 ;;; -------
-
 
 ;;; ------ extend built-in hooks ------
 ;; trim whitespaces
@@ -139,11 +138,33 @@
 (add-hook 'find-file-hook
 	  (lambda()
 	    (highlight-phrase "\\(BUG\\|FIXME\\|TODO\\|NOTE\\):" 'hi-red-b)))
-
 ;;; ------
 
-
 ;;; ------- packages configuration -------
+;; ------ auth-sources: use gpg and password-store(pass), git ----
+;; Don't bring up key recipient dialogue.
+(require 'epa-file)
+(setq epa-file-select-keys nil)
+(setq epa-file-encrypt-to '("sreekan.bandi@gmail.com"))
+(setq epg-gpg-program "gpg")
+;; Fix EasyPG error.
+;; From https://colinxy.github.io/software-installation/2016/09/24/emacs25-easypg-issue.html.
+(setq epg-pinentry-mode 'loopback)
+
+(defun copy-pass-by-key (key)
+  "Get passsword from password store for a given KEY!"
+  (interactive "sKey:")
+  (kill-new (auth-source-pass-get 'secret key)))
+
+(use-package auth-source-pass
+  :init
+  (auth-source-pass-enable)
+  :bind ("C-c w" . 'copy-pass-by-key)
+  :config
+  (use-package pass
+    :bind ("C-x M-p" . 'pass)))
+;; ------end of auth-sources ----------
+
 (use-package company
   :config
   (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
@@ -219,6 +240,9 @@
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
+
+(use-package ghub
+  :ensure t)
 
 (use-package magit
   :config
