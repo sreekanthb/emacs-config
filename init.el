@@ -53,7 +53,6 @@
 (size-indication-mode 1)
 (transient-mark-mode 1)
 (delete-selection-mode 1)
-(global-hl-line-mode 1)
 (global-auto-revert-mode t)
 
 ;; keep all generated files in .cache directory, clean .emacs.d
@@ -110,7 +109,6 @@
     (set-face-attribute
      face nil
      :family "Iosevka"
-     :width 'ultra-condensed
      :height 180)))
 
 ;; osx key modifiers
