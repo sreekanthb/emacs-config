@@ -104,12 +104,13 @@
 (setq default-directory "~/")
 
 ;; font config
-(when (find-font (font-spec :name "Iosevka"))
+(when (find-font (font-spec :name "Fira Code"))
   (dolist (face '(default fixed-pitch))
     (set-face-attribute
      face nil
-     :family "Iosevka"
-     :height 180)))
+     :family "Fira Code"
+     :width 'ultra-condensed
+     :height 170)))
 
 ;; osx key modifiers
 (when (eq system-type 'darwin)
@@ -265,7 +266,7 @@
 ;; clojure mode - https://github.com/clojure-emacs/clojure-mode
 (use-package clojure-mode
   :ensure t
-  :mode ("\\.edn\\'" . clojure-mode)    ; BUG: clojure-mode is enabled by default for .edn files
+  :mode ("\\.edn\\'" . clojure-mode)    ; BUG: clojure-mode is not enabled by default for .edn files
   :config
   (add-hook 'clojure-mode-hook #'paredit-mode))
 
@@ -292,6 +293,14 @@
 
 (use-package git-timemachine
   :ensure t)
+
+(use-package restclient
+  :ensure t
+  :mode ("\\.api\\'" . restclient-mode))
+
+(use-package yaml-mode
+  :ensure t
+  :mode ("\\.yml\\'" . yaml-mode))
 ;;; -------
 
 ;;; init.el ends here
